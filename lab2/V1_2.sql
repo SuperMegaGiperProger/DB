@@ -7,7 +7,7 @@ GO
 CREATE TABLE dbo.Person (
 	BusinessEntityID INT,
 	PersonType nchar(2),
-	NameStyle NameStyle,
+	NameStyle NameStyle NULL,
 	Title nvarchar(8),
 	FirstName Name,
 	MiddleName Name,
@@ -30,15 +30,15 @@ GO
   c) использу€ инструкцию ALTER TABLE, создайте дл€ таблицы dbo.Person ограничение дл€ пол€ Title, чтобы заполнить его можно было только значени€ми СMr.Т или СMs.Т;
 */
 ALTER TABLE dbo.Person
-ADD CONSTRAINT CHK_Title CHECK (Title = 'Mr.' OR Title = 'Ms.');
-GO 
+ADD CONSTRAINT CHK_Title CHECK (Title IN ('Mr.', 'Ms.'));
+GO
 
 /*
   d) использу€ инструкцию ALTER TABLE, создайте дл€ таблицы dbo.Person ограничение DEFAULT дл€ пол€ Suffix, задайте значение по умолчанию СN/AТ;
 */
 ALTER TABLE dbo.Person
 ADD CONSTRAINT DF_Suffix DEFAULT 'N/A' FOR Suffix;
-GO 
+GO
 
 /*
   e) заполните новую таблицу данными из Person.Person только дл€ тех сотрудников, которые существуют в таблице HumanResources.Employee,
